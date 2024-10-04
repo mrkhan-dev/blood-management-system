@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 
 import image1 from "../assets/vp-vantaa001.jpg";
 import image2 from "../assets/news_210620_00.jpg";
-import image3 from "../assets/360_F_606443909_QDiXfc9OkUjlhZYyDV70JDHUpZyzuYED.jpg";
+import image3 from "../assets/udp6_muv3_230302.jpg";
 
 // import required modules
 import {Autoplay, Pagination, Navigation} from "swiper/modules";

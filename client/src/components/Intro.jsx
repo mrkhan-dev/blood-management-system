@@ -3,14 +3,12 @@ import {CiCircleCheck} from "react-icons/ci";
 
 const Introduction = () => {
   return (
-    <div className="flex mt-28 justify-between">
+    <div className="flex mt-28 justify-between gap-28">
       <div>
         <img className="h-96 w-[560px] rounded-md" src={image} alt="" />
       </div>
       <div>
-        <h1 className="text-2xl font font-semibold font-montserrat">
-          Who We Are?
-        </h1>
+        <h1 className="text-4xl font-montserrat  font-semibold">Who We Are?</h1>
         <p className="font-poppins text-lg ">
           Donate4Life is a public donation center with blood donation members in
           the changing health care system.
