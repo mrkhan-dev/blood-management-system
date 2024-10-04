@@ -1,7 +1,15 @@
+import Banner from "../../components/Banner";
+import Introduction from "../../components/intro";
+import Navbar from "../../shared/Navbar";
+
 const Home = () => {
   return (
     <div>
-      <p>This is homepage</p>
+      <Navbar />
+      <Banner />
+      <div className="w-[81vw] mx-auto">
+        <Introduction />
+      </div>
     </div>
   );
 };
