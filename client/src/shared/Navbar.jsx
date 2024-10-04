@@ -1,15 +1,20 @@
 import {useState} from "react";
 import {NavLink} from "react-router-dom";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-30 bg-white shadow ">
-      <div className="container h-20 items-center px-6 py-4 mx-auto">
+      <div className="  h-20 items-center px-[172px] py-4 mx-auto">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
-            <NavLink to="/" className="text-4xl font-semibold font-sourceSans ">
+            <NavLink
+              to="/"
+              className="text-4xl flex font-semibold font-sourceSans "
+            >
+              <img className="h-12 w-12" src={logo} alt="logo" />
               Donate<span className="text-[#FE3C47]">4</span>Life
             </NavLink>
 
