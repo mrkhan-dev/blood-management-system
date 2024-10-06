@@ -4,8 +4,8 @@ const axiosCommon = axios.create({
   baseURL: "http://localhost:8000",
 });
 
-const UseAxiosCommon = () => {
+const useAxiosCommon = () => {
   return axiosCommon;
 };
 
-export default UseAxiosCommon;
+export default useAxiosCommon;
