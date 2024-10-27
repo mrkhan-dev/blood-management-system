@@ -1,7 +1,8 @@
 import {NavLink, useNavigate} from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import {ImSpinner} from "react-icons/im";
 const SignIn = () => {
-  const {signIn} = useAuth();
+  const {signIn, loading} = useAuth();
   const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
@@ -94,7 +95,11 @@ const SignIn = () => {
 
           <div className="mt-6">
             <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-500 rounded-lg hover:bg-red-400 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-50">
-              Login
+              {loading ? (
+                <ImSpinner className="animate-spin m-auto" />
+              ) : (
+                "Login"
+              )}
             </button>
 
             <div className="mt-6 text-center ">

@@ -1,11 +1,14 @@
-import {NavLink, useNavigate} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
+import {FcGoogle} from "react-icons/fc";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import {ImSpinner} from "react-icons/im";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const {createUser, setLoading, updateUserProfile, loading} = useAuth();
+  const {createUser, setLoading, updateUserProfile, loading, signInWithGoogle} =
+    useAuth();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -35,12 +38,25 @@ const SignUp = () => {
       navigate("/");
     } catch (err) {
       console.log(err);
+      setLoading(false);
+    }
+  };
+
+  // Google SignIn
+  const handleGoogleSignIn = async () => {
+    try {
+      await await signInWithGoogle();
+      navigate("/");
+      toast.success("Login Successful");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
     }
   };
 
   return (
     <section className="bg-red-50">
-      <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
+      <div className="container flex flex-col items-center justify-center min-h-screen px-6 mx-auto">
         <form onSubmit={handleSubmit} className="w-full max-w-md">
           <h1 className="text-3xl font-montserrat font-semibold text-center">
             Create an account
@@ -49,7 +65,7 @@ const SignUp = () => {
             Create your account and fill fill in the form below to get started
           </p>
 
-          <div className="flex items-center justify-center mt-6">
+          <div className="flex items-center justify-center mt-6 ">
             <NavLink
               className={({isActive}) =>
                 isActive
@@ -192,14 +208,34 @@ const SignUp = () => {
                 "SignUp"
               )}
             </button>
-
-            <div className="mt-6 text-center ">
-              <a href="#" className="text-sm text-red-500 hover:underline ">
-                Already have an account?
-              </a>
-            </div>
           </div>
         </form>
+        <div className="flex items-center pt-4 space-x-1 ">
+          <div className="flex-1 h-px sm:w-16 w-full dark:bg-gray-700"></div>
+          <p className="px-3 text-sm dark:text-gray-400">
+            Signup with social accounts
+          </p>
+          <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
+        </div>
+        <button
+          disabled={loading}
+          onClick={handleGoogleSignIn}
+          className="flex w-full disabled:cursor-not-allowed justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
+          <FcGoogle size={32} />
+
+          <p>Continue with Google</p>
+        </button>
+        <p className="px-6 text-sm text-center text-gray-400">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="hover:underline hover:text-rose-500 text-gray-600"
+          >
+            Login
+          </Link>
+          .
+        </p>
       </div>
     </section>
   );
