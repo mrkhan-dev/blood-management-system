@@ -10,6 +10,7 @@ import {
 import PropTypes from "prop-types";
 import {createContext, useEffect, useState} from "react";
 import auth from "../firebaseConfig/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext();
 const googleProvider = new GoogleAuthProvider();
@@ -35,9 +36,21 @@ const AuthProvider = ({children}) => {
     });
   };
 
-  const logOut = () => {
-    setUser(null);
+  const logOut = async () => {
+    setLoading(true);
+    await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+      withCredentials: true,
+    });
     return signOut(auth);
+  };
+
+  const getToken = async (email) => {
+    const {data} = await axios.post(
+      `${import.meta.env.VITE_API_URL}/jwt`,
+      {email},
+      {withCredentials: true}
+    );
+    return data;
   };
 
   const signInWithGoogle = () => {
@@ -45,10 +58,28 @@ const AuthProvider = ({children}) => {
     return signInWithPopup(auth, googleProvider);
   };
 
+  // save user to db
+  const saveUser = async (user) => {
+    const currentUser = {
+      email: user?.email,
+      role: "recipient",
+      status: "verified",
+    };
+    const {data} = await axios.put(
+      `${import.meta.env.VITE_API_URL}/user`,
+      currentUser
+    );
+    return data;
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
+      if (currentUser) {
+        getToken(currentUser.email);
+        saveUser(currentUser);
+      }
+      setLoading(false);
     });
     return () => {
       unsubscribe();

@@ -8,6 +8,7 @@ import {NavLink} from "react-router-dom";
 import {Link} from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import {MdBloodtype} from "react-icons/md";
+import logo from "../../assets/logo.png";
 
 const Sidebar = () => {
   const {logOut} = useAuth();
@@ -24,13 +25,7 @@ const Sidebar = () => {
         <div>
           <div className="block cursor-pointer p-4 font-bold">
             <Link to="/">
-              <img
-                // className='hidden md:block'
-                src="https://i.ibb.co/4ZXzmq5/logo.png"
-                alt="logo"
-                width="100"
-                height="100"
-              />
+              <img src={logo} alt="" />
             </Link>
           </div>
         </div>
@@ -52,14 +47,11 @@ const Sidebar = () => {
         <div>
           <div>
             <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-white mx-auto">
-              <Link to="/">
-                <img
-                  // className='hidden md:block'
-                  src="https://i.ibb.co/4ZXzmq5/logo.png"
-                  alt="logo"
-                  width="100"
-                  height="100"
-                />
+              <Link className="flex items-center" to="/">
+                <img className="h-10 w-10" src={logo} alt="logo" />
+                <p className="text-2xl font-semibold">
+                  Donate<span className="text-[#FE3C47]">4</span>Life
+                </p>
               </Link>
             </div>
           </div>
@@ -75,7 +67,7 @@ const Sidebar = () => {
                 to="statistics"
                 className={({isActive}) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#ffdada]   hover:text-gray-700 ${
-                    isActive ? "bg-gray-300  text-[#050316]" : "text-gray-600"
+                    isActive ? "bg-[#ffdada]  text-[#050316]" : "text-gray-600"
                   }`
                 }
               >
@@ -86,12 +78,12 @@ const Sidebar = () => {
                 <span className="mx-4 font-medium">Statistics</span>
               </NavLink>
 
-              {/* Add Room */}
+              {/* donate blood */}
               <NavLink
                 to="donate-blood"
                 className={({isActive}) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#ffdada]  hover:text-[#050316] ${
-                    isActive ? "bg-gray-300  text-[#050316]" : "text-gray-600"
+                    isActive ? "bg-[#ffdada]  text-[#050316]" : "text-gray-600"
                   }`
                 }
               >
@@ -106,7 +98,7 @@ const Sidebar = () => {
                 to="my-listings"
                 className={({isActive}) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#ffdada]    hover:text-[#050316] ${
-                    isActive ? "bg-gray-300  text-gray-700" : "text-gray-600"
+                    isActive ? "bg-[#ffdada]  text-gray-700" : "text-gray-600"
                   }`
                 }
               >
@@ -127,8 +119,8 @@ const Sidebar = () => {
           <NavLink
             to="/dashboard/profile"
             className={({isActive}) =>
-              `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
-                isActive ? "bg-gray-300  text-gray-700" : "text-gray-600"
+              `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#ffdada]   hover:text-gray-700 ${
+                isActive ? "bg-[#ffdada]  text-gray-700" : "text-gray-600"
               }`
             }
           >
@@ -138,7 +130,7 @@ const Sidebar = () => {
           </NavLink>
           <button
             onClick={logOut}
-            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform"
+            className="flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-[#ffdada]   hover:text-gray-700 transition-colors duration-300 transform"
           >
             <GrLogout className="w-5 h-5" />
 
