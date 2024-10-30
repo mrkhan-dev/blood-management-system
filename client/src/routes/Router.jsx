@@ -6,6 +6,7 @@ import SignIn from "../pages/signIn/SignIn";
 import DashboardLayout from "../layout/DashboardLayout";
 import Statistic from "../pages/Dashboard/Common/Statistic";
 import DonateBlood from "../pages/Dashboard/Donor/DonateBlood";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "donate-blood",
         element: <DonateBlood />,
+      },
+      {
+        path: "manage-users",
+        element: <ManageUsers />,
       },
     ],
   },
