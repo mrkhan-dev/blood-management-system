@@ -3,16 +3,20 @@ import {GrLogout} from "react-icons/gr";
 import {FcSettings} from "react-icons/fc";
 import {AiOutlineBars} from "react-icons/ai";
 import {BsGraphUp} from "react-icons/bs";
-import {TbHistory} from "react-icons/tb";
 import {NavLink} from "react-router-dom";
 import {Link} from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import {MdBloodtype} from "react-icons/md";
 import logo from "../../assets/logo.png";
+import MenuItem from "./Menu/MenuItem";
+import AdminMeu from "./Menu/AdminMeu";
+import DonorMenu from "./Menu/DonorMenu";
+import useRole from "../../hooks/useRole";
 
 const Sidebar = () => {
   const {logOut} = useAuth();
   const [isActive, setActive] = useState(false);
+  const [role] = useRole();
+  console.log(role);
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -24,8 +28,11 @@ const Sidebar = () => {
       <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
         <div>
           <div className="block cursor-pointer p-4 font-bold">
-            <Link to="/">
-              <img src={logo} alt="" />
+            <Link className="flex items-center" to="/">
+              <img className="h-6 w-6" src={logo} alt="" />
+              <p className="text-xl font-semibold">
+                Donate<span className="text-[#FE3C47]">4</span>Life
+              </p>
             </Link>
           </div>
         </div>
@@ -63,51 +70,14 @@ const Sidebar = () => {
             {/*  Menu Items */}
             <nav>
               {/* Statistics */}
-              <NavLink
-                to="statistics"
-                className={({isActive}) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#ffdada]   hover:text-gray-700 ${
-                    isActive ? "bg-[#ffdada]  text-[#050316]" : "text-gray-600"
-                  }`
-                }
-              >
-                <div className="bg-[#ffdada] h-10 w-10 rounded-full ">
-                  <BsGraphUp className="w-6 h-6 flex mt-2 ml-2  text-[#ff4747]" />
-                </div>
 
-                <span className="mx-4 font-medium">Statistics</span>
-              </NavLink>
-
-              {/* donate blood */}
-              <NavLink
-                to="donate-blood"
-                className={({isActive}) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#ffdada]  hover:text-[#050316] ${
-                    isActive ? "bg-[#ffdada]  text-[#050316]" : "text-gray-600"
-                  }`
-                }
-              >
-                <div className="bg-[#ffdada] h-10 w-10 rounded-full ">
-                  <MdBloodtype className="w-6 h-6 flex mt-2 ml-2 text-[#ff4747]" />
-                </div>
-
-                <span className="mx-4 font-medium">Donate blood</span>
-              </NavLink>
-              {/* My Listing */}
-              <NavLink
-                to="my-listings"
-                className={({isActive}) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-[#ffdada]    hover:text-[#050316] ${
-                    isActive ? "bg-[#ffdada]  text-gray-700" : "text-gray-600"
-                  }`
-                }
-              >
-                <div className="bg-[#ffdada] h-10 w-10 rounded-full ">
-                  <TbHistory className="w-6 h-6 flex mt-2 ml-2 text-[#ff4747]" />
-                </div>
-
-                <span className="mx-4 font-medium">Donation History</span>
-              </NavLink>
+              <MenuItem
+                address="/dashboard"
+                label="Statistics"
+                icon={BsGraphUp}
+              />
+              {role === "admin" && <AdminMeu />}
+              {role === "donor" && <DonorMenu />}
             </nav>
           </div>
         </div>

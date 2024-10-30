@@ -128,6 +128,19 @@ async function run() {
       res.send(result);
     });
 
+    // get all users
+    app.get("/users", async (req, res) => {
+      const result = await usersCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get a single user info
+    app.get("/user/:email", async (req, res) => {
+      const email = req.params.email;
+      const result = await usersCollection.findOne({email});
+      res.send(result);
+    });
+
     app.get("/donationProcess", async (req, res) => {
       const result = await processCollection.find().toArray();
       res.send(result);
