@@ -128,6 +128,18 @@ async function run() {
       res.send(result);
     });
 
+    // update use role
+    app.patch("/users/role/:email", async (req, res) => {
+      const email = req.params.email;
+      const user = req.body;
+      const query = {email};
+      const updatedDoc = {
+        $set: {...user, Timestamp: Date.now()},
+      };
+      const result = await usersCollection.updateOne(query, updatedDoc);
+      res.send(result);
+    });
+
     // get all users
     app.get("/users", async (req, res) => {
       const result = await usersCollection.find().toArray();

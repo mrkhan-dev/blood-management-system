@@ -1,13 +1,16 @@
 /* eslint-disable react/prop-types */
 const UserDataRows = ({user, refetch}) => {
+
+  
+
   return (
     <tr>
       <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-        <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+        <td className="px-4 py-4 text-base text-gray-500 whitespace-nowrap">
           {user.email}
         </td>
       </td>
-      <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+      <td className="px-4 py-4 text-base text-gray-500 whitespace-nowrap">
         {user.role}
       </td>
 
@@ -16,8 +19,8 @@ const UserDataRows = ({user, refetch}) => {
           <p
             className={`${
               user.status === "verified"
-                ? " text-sm font-normal text-emerald-500"
-                : " text-red-400"
+                ? " text-base font-normal text-emerald-500"
+                : " text-red-400 text-base"
             } whitespace-nowrap `}
           >
             {user.status}
@@ -28,11 +31,11 @@ const UserDataRows = ({user, refetch}) => {
       </td>
       <td className="px-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center gap-x-2">
-          <button className="px-3 py-1 text-xs text-indigo-500 rounded-full bg-indigo-100/60">
+          <button className="px-3 py-1 text-base text-indigo-500 rounded-full bg-indigo-100/60">
             Update Role
           </button>
 
-          <button className="px-3 py-1 text-xs text-pink-500 rounded-full bg-pink-100/60">
+          <button className="px-3 py-1 text-base text-pink-500 rounded-full bg-pink-100/60">
             Delete User
           </button>
         </div>

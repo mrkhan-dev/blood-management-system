@@ -11,17 +11,20 @@ import MenuItem from "./Menu/MenuItem";
 import AdminMeu from "./Menu/AdminMeu";
 import DonorMenu from "./Menu/DonorMenu";
 import useRole from "../../hooks/useRole";
+import RecipientMenu from "./Menu/RecipientMenu";
 
 const Sidebar = () => {
   const {logOut} = useAuth();
   const [isActive, setActive] = useState(false);
   const [role] = useRole();
-  console.log(role);
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
+
+  // modal
+
   return (
     <>
       {/* Small Screen Navbar */}
@@ -78,6 +81,7 @@ const Sidebar = () => {
               />
               {role === "admin" && <AdminMeu />}
               {role === "donor" && <DonorMenu />}
+              {role === "recipient" && <RecipientMenu />}
             </nav>
           </div>
         </div>
