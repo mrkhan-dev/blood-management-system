@@ -57,6 +57,9 @@ async function run() {
     const bloodDonationCollection = client
       .db("Donate4Life")
       .collection("all-donation-post");
+    const bloodRequestCollection = client
+      .db("Donate4Life")
+      .collection("all-request-post");
     const usersCollection = client.db("Donate4Life").collection("users");
     const districtCollection = client.db("Donate4Life").collection("districts");
     const upazilaCollection = client.db("Donate4Life").collection("upazilas");
@@ -94,6 +97,12 @@ async function run() {
     app.post("/donation-post", async (req, res) => {
       const bloodDonationPost = req.body;
       const result = await bloodDonationCollection.insertOne(bloodDonationPost);
+      res.send(result);
+    });
+
+    app.post("/request-post", async (req, res) => {
+      const bloodRequestPost = req.body;
+      const result = await bloodRequestCollection.insertOne(bloodRequestPost);
       res.send(result);
     });
 
