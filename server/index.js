@@ -57,7 +57,12 @@ async function run() {
     const bloodDonationCollection = client
       .db("Donate4Life")
       .collection("all-donation-post");
+    const bloodRequestCollection = client
+      .db("Donate4Life")
+      .collection("all-request-post");
     const usersCollection = client.db("Donate4Life").collection("users");
+    const districtCollection = client.db("Donate4Life").collection("districts");
+    const upazilaCollection = client.db("Donate4Life").collection("upazilas");
 
     app.post("/jwt", async (req, res) => {
       const user = req.body;
@@ -95,6 +100,12 @@ async function run() {
       res.send(result);
     });
 
+    app.post("/request-post", async (req, res) => {
+      const bloodRequestPost = req.body;
+      const result = await bloodRequestCollection.insertOne(bloodRequestPost);
+      res.send(result);
+    });
+
     // save user to database
     app.put("/user", async (req, res) => {
       const user = req.body;
@@ -128,6 +139,18 @@ async function run() {
       res.send(result);
     });
 
+    // update use role
+    app.patch("/users/role/:email", async (req, res) => {
+      const email = req.params.email;
+      const user = req.body;
+      const query = {email};
+      const updatedDoc = {
+        $set: {...user, Timestamp: Date.now()},
+      };
+      const result = await usersCollection.updateOne(query, updatedDoc);
+      res.send(result);
+    });
+
     // get all users
     app.get("/users", async (req, res) => {
       const result = await usersCollection.find().toArray();
@@ -138,6 +161,18 @@ async function run() {
     app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
       const result = await usersCollection.findOne({email});
+      res.send(result);
+    });
+
+    // get districts data
+    app.get("/districts", async (req, res) => {
+      const result = await districtCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get upazilas data
+    app.get("/upazilas", async (req, res) => {
+      const result = await upazilaCollection.find().toArray();
       res.send(result);
     });
 

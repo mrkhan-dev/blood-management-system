@@ -1,26 +1,4 @@
-import {useQuery} from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import LoadingSpinner from "../../../components/Shared/Spinner";
-import UserDataRows from "../../../components/Dashboard/TableRows";
-
-const ManageUsers = () => {
-  const axiosSecure = useAxiosSecure();
-
-  // fetch user data
-  const {
-    data: user = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      const {data} = await axiosSecure.get(`/users`);
-      return data;
-    },
-  });
-
-  if (isLoading) return <LoadingSpinner />;
-
+const ManagePosts = () => {
   return (
     <div>
       <section className="container px-4 mx-auto">
@@ -28,7 +6,7 @@ const ManageUsers = () => {
           <h2 className="text-lg font-medium text-gray-800">Team members</h2>
 
           <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full">
-            {user.length}
+            0
           </span>
         </div>
 
@@ -79,13 +57,6 @@ const ManageUsers = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {/* table rows */}
-                    {user?.map((user) => (
-                      <UserDataRows
-                        key={user._id}
-                        user={user}
-                        refetch={refetch}
-                      />
-                    ))}
                   </tbody>
                 </table>
               </div>
@@ -97,4 +68,4 @@ const ManageUsers = () => {
   );
 };
 
-export default ManageUsers;
+export default ManagePosts;
