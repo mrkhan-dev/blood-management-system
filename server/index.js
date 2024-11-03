@@ -58,6 +58,8 @@ async function run() {
       .db("Donate4Life")
       .collection("all-donation-post");
     const usersCollection = client.db("Donate4Life").collection("users");
+    const districtCollection = client.db("Donate4Life").collection("districts");
+    const upazilaCollection = client.db("Donate4Life").collection("upazilas");
 
     app.post("/jwt", async (req, res) => {
       const user = req.body;
@@ -150,6 +152,18 @@ async function run() {
     app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
       const result = await usersCollection.findOne({email});
+      res.send(result);
+    });
+
+    // get districts data
+    app.get("/districts", async (req, res) => {
+      const result = await districtCollection.find().toArray();
+      res.send(result);
+    });
+
+    // get upazilas data
+    app.get("/upazilas", async (req, res) => {
+      const result = await upazilaCollection.find().toArray();
       res.send(result);
     });
 
