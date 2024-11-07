@@ -1,4 +1,24 @@
+import {useQuery} from "@tanstack/react-query";
+import AllPostRows from "../../../components/Dashboard/TableRows/AllpostRows";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../../components/Shared/Spinner";
+
 const ManagePosts = () => {
+  const axiosSecure = useAxiosSecure();
+
+  // fetch post data
+  const {
+    data: posts = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["post"],
+    queryFn: async () => {
+      const {data} = await axiosSecure.get("/all-post");
+      return data;
+    },
+  });
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div>
       <section className="container px-4 mx-auto">
@@ -20,7 +40,7 @@ const ManagePosts = () => {
                     <tr>
                       <th
                         scope="col"
-                        className="px-12 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700"
+                        className=" px-6 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700"
                       >
                         <button className="flex items-center gap-x-2">
                           <span>Email</span>
@@ -32,20 +52,32 @@ const ManagePosts = () => {
                         className="px-4 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700 "
                       >
                         <button className="flex items-center gap-x-2">
-                          <span>Role</span>
+                          <span>Post Title</span>
                         </button>
                       </th>
 
                       <th
                         scope="col"
-                        className="px-12 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700"
+                        className=" px-2 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700"
+                      >
+                        Group
+                      </th>
+                      <th
+                        scope="col"
+                        className=" px-12 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700"
                       >
                         Status
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-1 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700"
+                      >
+                        Quantity
                       </th>
 
                       <th
                         scope="col"
-                        className="px-4 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700 "
+                        className="pl-20 ml-24 py-3.5 text-base font-normal text-left rtl:text-right text-gray-700 "
                       >
                         Actions
                       </th>
@@ -57,6 +89,13 @@ const ManagePosts = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {/* table rows */}
+                    {posts.map((post) => (
+                      <AllPostRows
+                        key={post._id}
+                        post={post}
+                        refetch={refetch}
+                      />
+                    ))}
                   </tbody>
                 </table>
               </div>

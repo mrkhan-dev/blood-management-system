@@ -3,7 +3,7 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const {MongoClient, ServerApiVersion, Timestamp} = require("mongodb");
+const {MongoClient, ServerApiVersion, Timestamp, ObjectId} = require("mongodb");
 const jwt = require("jsonwebtoken");
 
 const port = process.env.PORT || 8000;
@@ -151,6 +151,37 @@ async function run() {
       res.send(result);
     });
 
+    // Update recipient post status
+    app.patch("/post/status/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}; // Use the ObjectId
+
+      const updatedDoc = {
+        $set: {status: "approved"}, // Update status to "approved"
+      };
+
+      try {
+        const result = await bloodRequestCollection.updateOne(
+          query,
+          updatedDoc
+        );
+        res.send(result);
+      } catch (error) {
+        res.status(500).send({error: "Failed to update post status"});
+      }
+    });
+
+    // app.patch("/post/status/:email", async (req, res) => {
+    //   const email = req.params.email;
+    //   const post = req.body;
+    //   const query = {email};
+    //   const updatedDoc = {
+    //     $set: {...post},
+    //   };
+    //   const result = await bloodRequestCollection.updateOne(query, updatedDoc);
+    //   res.send(result);
+    // });
+
     // get all users
     app.get("/users", async (req, res) => {
       const result = await usersCollection.find().toArray();
@@ -161,6 +192,12 @@ async function run() {
     app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
       const result = await usersCollection.findOne({email});
+      res.send(result);
+    });
+
+    // get all post
+    app.get("/all-post", async (req, res) => {
+      const result = await bloodRequestCollection.find().toArray();
       res.send(result);
     });
 
