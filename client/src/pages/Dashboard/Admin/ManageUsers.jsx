@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../components/Shared/Spinner";
-import UserDataRows from "../../../components/Dashboard/TableRows";
+import UserDataRows from "../../../components/Dashboard/TableRows/TableRows";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();

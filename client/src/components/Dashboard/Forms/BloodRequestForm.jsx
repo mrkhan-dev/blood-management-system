@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {useState} from "react";
 import DatePicker from "react-datepicker";
@@ -11,7 +12,7 @@ import {ImSpinner} from "react-icons/im";
 import useAuth from "../../../hooks/useAuth";
 
 const BloodRequestForm = ({bloodGroup}) => {
-  const [startDate, setStartDate] = useState(null);
+  const [startDate, setStartDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {user} = useAuth();
@@ -74,6 +75,7 @@ const BloodRequestForm = ({bloodGroup}) => {
         email: user?.email,
         status: "pending",
       };
+      console.table(requestData);
       await mutateAsync(requestData);
     } catch (err) {
       console.log(err.message);

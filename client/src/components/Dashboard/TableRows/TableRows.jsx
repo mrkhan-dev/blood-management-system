@@ -1,9 +1,9 @@
 import {useState} from "react";
-import useAuth from "../../hooks/useAuth";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import {useMutation} from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import UpdateUserRoleModal from "./Modals/UpdateUserRole";
+import UpdateUserRoleModal from "../Modals/UpdateUserRole";
 
 /* eslint-disable react/prop-types */
 const UserDataRows = ({user, refetch}) => {
