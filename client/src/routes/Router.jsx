@@ -9,6 +9,7 @@ import DonateBlood from "../pages/Dashboard/Donor/DonateBlood";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import CreateBloodRequest from "../pages/Dashboard/Recipient/CreateBloodRequest";
 import ManagePosts from "../pages/Dashboard/Admin/ManagePosts";
+import SeeBloodRequests from "../pages/Dashboard/Donor/SeeBloodRequests";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "donate-blood",
         element: <DonateBlood />,
+      },
+      {
+        path: "blood-requests",
+        element: <SeeBloodRequests />,
       },
       {
         path: "manage-users",

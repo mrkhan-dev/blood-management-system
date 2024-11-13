@@ -114,7 +114,7 @@ const UpdatePostStatusModal = ({setIsOpen, isOpen, modalHandler, post}) => {
                     onClick={() => modalHandler(selected)}
                     disabled={post.status === "approved"}
                   >
-                    Update
+                    Approve
                   </button>
                   <button
                     type="button"

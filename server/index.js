@@ -197,7 +197,10 @@ async function run() {
 
     // get all post
     app.get("/all-post", async (req, res) => {
-      const result = await bloodRequestCollection.find().toArray();
+      const bloodGroup = req.query.bloodGroup;
+      let query = {};
+      if (bloodGroup && bloodGroup !== "null") query = {bloodGroup};
+      const result = await bloodRequestCollection.find(query).toArray();
       res.send(result);
     });
 

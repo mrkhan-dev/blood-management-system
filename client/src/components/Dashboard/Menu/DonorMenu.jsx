@@ -13,12 +13,12 @@ const DonorMenu = () => {
       <MenuItem
         icon={SlEyeglass}
         label="See blood requests"
-        address="donate-blood"
+        address="blood-requests"
       />
       <MenuItem
         icon={SlEyeglass}
         label="Donation history"
-        address="donate-blood"
+        address="donation-history"
       />
     </>
   );
