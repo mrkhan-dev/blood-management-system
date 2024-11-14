@@ -9,6 +9,7 @@ import ReqCard from "../../../components/Dashboard/Cards/ReqCard";
 const SeeBloodRequests = () => {
   const axiosCommon = useAxiosCommon();
   const [params, setParams] = useSearchParams();
+
   const bloodGroup = params.get("bloodGroup");
   const encodedBloodGroup = encodeURIComponent(bloodGroup);
 
@@ -22,6 +23,8 @@ const SeeBloodRequests = () => {
     },
   });
 
+  const sortedPost = [...post].reverse();
+
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -29,16 +32,16 @@ const SeeBloodRequests = () => {
       <div className="w-full  sticky ">
         <h1 className="text-xl font-semibold px-4">All Blood Requests</h1>
         <BloodGroup />
-        {post && post.length > 0 ? (
+        {sortedPost && sortedPost.length > 0 ? (
           <div className="md:grid md:grid-cols-3">
-            {post.map((reqPost) => (
+            {sortedPost.map((reqPost) => (
               <ReqCard key={reqPost._id} reqPost={reqPost} />
             ))}
           </div>
         ) : (
           <div className="flex flex-col justify-center min-h-[calc(100vh-300px)]">
             <h1 className="text-center text-2xl font-bold">
-              No Post Available In This Blood Group
+              No Post Available In This Blood Group!
             </h1>
           </div>
         )}
