@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {useState} from "react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosCommon from "../../../hooks/useAxiosCommon";
@@ -12,7 +12,7 @@ import {ImSpinner} from "react-icons/im";
 import useAuth from "../../../hooks/useAuth";
 
 const BloodRequestForm = ({bloodGroup}) => {
-  const [startDate, setStartDate] = useState(new Date());
+  // const [startDate, setStartDate] = useState(new Date());
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {user} = useAuth();
@@ -43,7 +43,7 @@ const BloodRequestForm = ({bloodGroup}) => {
     register,
     formState: {errors},
     handleSubmit,
-    setValue,
+    // setValue,
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -174,7 +174,7 @@ const BloodRequestForm = ({bloodGroup}) => {
                 <label className="block mb-2 text-sm text-gray-600 ">
                   Date
                 </label>
-                <DatePicker
+                {/* <DatePicker
                   selected={startDate}
                   onChange={(date) => {
                     setStartDate(date);
@@ -189,7 +189,7 @@ const BloodRequestForm = ({bloodGroup}) => {
                     {" "}
                     Date is required
                   </p>
-                )}
+                )} */}
               </div>
 
               <div>

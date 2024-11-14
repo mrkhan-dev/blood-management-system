@@ -11,7 +11,7 @@ const ReqCard = ({reqPost}) => {
     setIsOpen(false);
   };
   if (reqPost.status === "pending") return;
-  const date = new Date().toDateString(reqPost.date);
+  const date = new Date(reqPost.date).toDateString();
   return (
     <div className="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-lg mx-auto">
       <div className="flex justify-center -mt-16 md:justify-end">
